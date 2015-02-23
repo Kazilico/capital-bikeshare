@@ -5,7 +5,19 @@
     the station at 23rd and Crystal Drive (which is ID "31011")
 */
 var localStation = function(callback) {
+$.ajax({
 
+    url: "http://localhost:3000/stations",
+    method: "GET",
+
+    success: function(data) {
+
+      var station = _.filter(data, function(station) {
+        return (station.id === "31011")
+      })
+      callback(station[0])
+    }
+})
 
 }
 
@@ -17,11 +29,24 @@ var localStation = function(callback) {
   (For simplicity's sake, the northernmost station is the one
     with the highest latitude.)
 */
+
+
 var northernmostStation = function(callback) {
+$.ajax({
 
-  
+    url: "http://localhost:3000/stations",
+    method: "GET",
+
+    success: function(data) {
+      
+      var station = _.max(data, function(station) {
+        return (station.latitude)         
+      })
+      callback(station)
+    }
+})
 }
-
+  
 /*
   This function accepts a callback function as a parameter.
 
@@ -29,7 +54,23 @@ var northernmostStation = function(callback) {
     a single, random station in the Capital Bikeshare system.
 */
 var randomStation = function(callback) {
+$.ajax({
 
+    url: "http://localhost:3000/stations",
+
+    method: "GET",
+
+    success: function(data) {
+      console.log(data)
+
+    var station = function getRandomArbitrary(min, max) {
+      return station(station.name)     
+    }
+    console.log(station)
+    callback(station)
+    }
+
+})
   
 }
 

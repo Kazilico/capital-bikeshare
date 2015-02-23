@@ -2,10 +2,12 @@ describe("Capital Bikeshare System Data", function(){
 
   describe("Nearest Station", function(){
     it("should be able to retrieve the nearest station", function(testDone){
-      localStation(function(data){
-        expect(data.name).to.equal("23rd & Crystal Dr")
-        testDone()
-      })
+      localStation(
+        function(data){
+          expect(data.name).to.equal("23rd & Crystal Dr")
+          testDone()
+        }
+      )
     })
   })
   
