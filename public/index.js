@@ -17,7 +17,7 @@ $.ajax({
       })
       callback(station[0])
     }
-})
+  })
 
 }
 
@@ -44,7 +44,7 @@ $.ajax({
       })
       callback(station)
     }
-})
+  })
 }
   
 /*
@@ -54,26 +54,19 @@ $.ajax({
     a single, random station in the Capital Bikeshare system.
 */
 var randomStation = function(callback) {
-$.ajax({
+  $.ajax({
 
-    url: "http://localhost:3000/stations",
+      url: "http://localhost:3000/stations",
+      method: "GET",
 
-    method: "GET",
+      success: function(data) {
 
-    success: function(data) {
-      console.log(data)
+        var station = _.shuffle(data)
 
-    var station = function getRandomArbitrary(min, max) {
-      return station(station.name)     
-    }
-    console.log(station)
-    callback(station)
-    }
-
-})
-  
+        callback(station[0])
+      }
+  })
 }
-
 
 /*
   This function accepts a callback function as a parameter.
@@ -82,10 +75,20 @@ $.ajax({
     any stations in the Capital Bikeshare system that currently have 0 bikes.
 */
 var emptyStations = function(callback) {
+$.ajax({
 
-  
+    url: "http://localhost:3000/stations",
+    method: "GET",
+
+    success: function(data) {
+      var station = _.filter(data, function(station){
+        return (station.bikes === 0)
+      })
+      
+      callback(station)
+    }
+  })   
 }
-
 /*
   This function accepts a callback function as a parameter.
 
@@ -94,6 +97,19 @@ var emptyStations = function(callback) {
     in the last 15 minutes.
 */
 var recentStations = function(callback) {
+$.ajax({
 
+    url: "http://localhost:3000/stations",
+    method: "GET",
+    success: function(data) {
+
+      var station = _.filter(data, function(station){
+        return (station.lastUpdate > 1424902799709)
+      })
+      console.log(station)
+
+      callback(station)
+    }
+  })
   
 }
